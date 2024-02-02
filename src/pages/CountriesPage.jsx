@@ -27,7 +27,7 @@ export const CountriesPage = () => {
       <ul>
         {countryData?.map((i) => (
           <li key={i.name.common}>
-            <Link to={i.name.common}>
+            <Link to={i.cca2}>
               <p>{i.name.common} {i.flag}</p>
               <img src={i.flags.png} alt={i.name.common} />
             </Link>

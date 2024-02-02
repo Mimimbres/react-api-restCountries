@@ -5,10 +5,10 @@ export const CountriesDetailPage = () => {
   const { id }= useParams();
 
 
-  const fetchData = async (id) => {
-    const response = await fetch(`https://restcountries.com/v3.1/all`);
+  const fetchDataById = async (id) => {
+    const response = await fetch(`https://restcountries.com/v3.1/alpha/${id}`);
     const jsonData = await response.json();
-    return jsonData[id];
+    return jsonData[0];
   };
 
   const { data: countryData, isLoading } = useQuery({
@@ -16,6 +16,7 @@ export const CountriesDetailPage = () => {
     queryFn: () => fetchDataById(id),
     enabled: !!id,
   });
+console.log(countryData);
 
   if (isLoading || !countryData) {
     return <h1>LOADING...</h1>;
@@ -27,7 +28,7 @@ export const CountriesDetailPage = () => {
       <p>Country Code: {countryData.cca2}</p>
       <p>Capital: {countryData.capital} </p>
       <p>Region: {countryData.region}</p>
-      <img src={countryData.flags.png} alt="" />
+      <h2><b>FLAG:</b></h2><img src={countryData.flags.png} alt={countryData.flags.alt} />
     </>
   );
-}
+} 
